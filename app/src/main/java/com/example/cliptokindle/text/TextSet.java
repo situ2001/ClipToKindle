@@ -1,7 +1,5 @@
 package com.example.cliptokindle.text;
 
-import android.content.Context;
-
 import com.example.cliptokindle.util.Utils;
 
 import java.io.File;
@@ -33,10 +31,6 @@ public class TextSet implements Serializable {
     public void remove(int i) {
         texts.remove(i);
         this.save();
-    }
-
-    public Text get(int index) {
-        return texts.get(index);
     }
 
     public void forEach(Consumer<? super Text> c) {
