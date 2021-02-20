@@ -7,23 +7,22 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/httpServerStatus"
+        android:id="@+id/text_server_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/getClipBoardText"
+        tools:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/button_get_clip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/getClipBoardText"
+        android:id="@+id/button_get_clip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
-        android:text="ADD FROM CLIPBOARD"
+        android:text="@string/add_from_clipboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -33,20 +32,19 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:text="Server"
+        android:text="@string/server"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
-        android:id="@+id/content_fragment"
+        android:id="@+id/fragment_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/httpServerStatus"
+        app:layout_constraintBottom_toTopOf="@+id/text_server_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966">
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
