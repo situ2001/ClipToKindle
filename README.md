@@ -15,7 +15,7 @@ Analogically, you can follow step 2 to add more items. After other items are add
 
 ## Todo(s)
 
-- [] check network (WiFi or hotspot)
-- [] Remove hardcode
-- [] UI improvement
-- [] more user-friendly experience
+- [ ] check network (WiFi or hotspot)
+- [ ] Remove hardcode
+- [ ] UI improvement
+- [ ] more user-friendly experience
