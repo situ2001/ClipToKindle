@@ -5,15 +5,27 @@ import androidx.annotation.NonNull;
 import com.example.cliptokindle.text.TextSet;
 
 public class PageGenerator {
-    private static StringBuilder msg;
-    private static TextSet textSet;
+    private static PageGenerator pageGenerator;
 
-    public static void setTextSet(TextSet t) {
-        textSet = t;
+    private StringBuilder msg;
+    private final TextSet textSet;
+
+    public static PageGenerator getPageGenerator() {
+        return pageGenerator;
+    }
+
+    private PageGenerator(TextSet textSet) {
+        this.textSet = textSet;
+    }
+
+    public synchronized static void build(TextSet textSet) {
+        if (pageGenerator == null) {
+            pageGenerator = new PageGenerator(textSet);
+        }
     }
 
     @NonNull
-    public static String generate() {
+    public String generate() {
         msg = new StringBuilder();
 
         begin();
@@ -23,13 +35,13 @@ public class PageGenerator {
         return msg.toString();
     }
 
-    private static void begin() {
+    private void begin() {
         msg.append("<html><body><h1>Clip to Kindle</h1>\n");
         msg.append("<a href=\"/\"><h2>Reload this page</h2></a>\n<br>\n");
         msg.append("<h2>Links</h2>\n");
     }
 
-    private static void end() {
+    private void end() {
         msg.append("</body></html>\n");
     }
 }

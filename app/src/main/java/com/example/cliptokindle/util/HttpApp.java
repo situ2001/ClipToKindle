@@ -26,7 +26,7 @@ public class HttpApp extends NanoHTTPD {
 
     @Override
     public Response serve(IHTTPSession session) {
-        return newFixedLengthResponse(PageGenerator.generate());
+        return newFixedLengthResponse(PageGenerator.getPageGenerator().generate());
         //return newFixedLengthResponse(msg.toString() + "</body></html>\n");
     }
     

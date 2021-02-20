@@ -1,14 +1,14 @@
 package com.example.cliptokindle;
 
+import android.content.ClipboardManager;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.ClipboardManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.cliptokindle.fragment.RecyclerViewFragment;
 import com.example.cliptokindle.text.Text;
@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         //show RecycleViewFragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        RecyclerViewFragment fragment = new RecyclerViewFragment();
+        RecyclerViewFragment fragment = null;
         if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            fragment = new RecyclerViewFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
         }
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tvHttpServerStatus = findViewById(R.id.httpServerStatus);
         Button btClipBoard = findViewById(R.id.getClipBoardText);
         SwitchCompat switchServer = findViewById(R.id.switch_server);
+
+        ClipboardManager manager = getSystemService(ClipboardManager.class);
         HttpApp app = new HttpApp();
 
         switchServer.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -62,36 +65,37 @@ public class MainActivity extends AppCompatActivity {
         });
         switchServer.setChecked(true);
 
+        RecyclerViewFragment finalFragment = fragment; // an effectively final variable
         btClipBoard.setOnClickListener(l -> {
-            ClipboardManager manager = getApplicationContext().getSystemService(ClipboardManager.class);
-
-            String text;
             if (!manager.hasPrimaryClip()) {
+                Toast.makeText(this, "No text in clipboard", Toast.LENGTH_SHORT).show();
                 return;
             }
-            text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-
+            String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
             TextSetHelper.get().add(new Text(text));
 
-            /* Temporarily not use
-            Bundle bundle = new Bundle();
-            bundle.putString("content", text);
+            finalFragment.getmAdapter().notifyDataSetChanged();
+        });
 
-            DialogFragment dialogFragment = new ClipBoardDialogFragment();
-            dialogFragment.setArguments(bundle);
-            dialogFragment.show(getSupportFragmentManager(), TAG);
-             */
+        //listening to clipboard
+        manager.addPrimaryClipChangedListener(() -> {
+            if (!manager.hasPrimaryClip()) {
+                Toast.makeText(this, "No text in clipboard", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
+            TextSetHelper.get().add(new Text(text));
 
-            fragment.getmAdapter().notifyDataSetChanged();
+            finalFragment.getmAdapter().notifyDataSetChanged();
+
+            Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
         });
     }
 
     private void init() {
-        //load TextSet and PageGenerator
         TextSet textSet = TextSetHelper.get();
         Utils.setStoragePath(this);
         textSet.load();
-        PageGenerator.setTextSet(textSet);
-        Log.e("DEBUG", PageGenerator.generate());
+        PageGenerator.build(textSet);
     }
 }

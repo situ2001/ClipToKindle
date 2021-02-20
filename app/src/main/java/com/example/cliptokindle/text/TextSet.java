@@ -23,17 +23,16 @@ public class TextSet implements Serializable {
     }
 
     public void add(Text s) {
-        texts.add(s);
-        this.save();
+        boolean predicate = texts.stream().anyMatch(text -> text.getText().equals(s.getText()));
+        if (!predicate) {
+            texts.add(s);
+            this.save();
+        }
     }
 
     public void remove(int i) {
         texts.remove(i);
         this.save();
-    }
-
-    public boolean contains(Text s) {
-        return texts.contains(s);
     }
 
     public Text get(int index) {
