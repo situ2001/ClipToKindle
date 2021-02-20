@@ -13,7 +13,6 @@ public class HttpApp extends NanoHTTPD {
 
     public HttpApp() {
         super(8080);
-        init();
     }
 
     @Override
@@ -28,13 +27,8 @@ public class HttpApp extends NanoHTTPD {
 
     @Override
     public Response serve(IHTTPSession session) {
-        return newFixedLengthResponse(msg.toString() + "</body></html>\n");
-    }
-
-    public void init() {
-        msg.append("<html><body><h1>Clip to Kindle</h1>\n");
-        msg.append("<a href=\"/\"><h2>Reload this page</h2></a>\n<br>\n");
-        msg.append("<h2>Links</h2>");
+        return newFixedLengthResponse(PageGenerator.generate());
+        //return newFixedLengthResponse(msg.toString() + "</body></html>\n");
     }
     
     public static void add(Text text) {

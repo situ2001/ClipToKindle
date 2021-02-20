@@ -4,18 +4,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
-    private List<String>  mDataSet;
+    private final List<Text> mDataSet;
 
-    public CustomAdapter(List<String> mDataSet) {
+    public CustomAdapter(List<Text> mDataSet) {
         this.mDataSet = mDataSet;
     }
 
@@ -30,8 +32,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Log.d(TAG, "Element " + position + " set.");
-        viewHolder.getTextView().setText(mDataSet.get(position));
+        viewHolder.getTextView().setText(mDataSet.get(position).getText());
+        viewHolder.getButton().setOnClickListener(l -> {
+            int pos = viewHolder.getAdapterPosition();
+            TextSetHelper.get().remove(pos);
+            this.notifyItemRemoved(pos);
+        });
     }
 
     @Override
@@ -41,15 +47,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        private final Button button;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(l -> Log.d(TAG, "Element " + getAdapterPosition() + " clicked."));
             this.textView = v.findViewById(R.id.textView);
+            this.button = v.findViewById(R.id.button_remove);
         }
 
         public TextView getTextView() {
             return textView;
+        }
+
+        public Button getButton() {
+            return button;
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,14 +19,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
+        init();
+
         //show RecycleViewFragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        RecyclerViewFragment fragment = new RecyclerViewFragment();
         if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            RecyclerViewFragment fragment = new RecyclerViewFragment();
             transaction.replace(R.id.content_fragment, fragment);
             transaction.commit();
-        }*/
+        }
 
         TextView tvHttpServerStatus = findViewById(R.id.httpServerStatus);
         Button btClipBoard = findViewById(R.id.getClipBoardText);
@@ -59,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
             text = manager.getPrimaryClip().getItemAt(0).getText().toString();
 
-            //HttpApp.add(new Text(text));
-
             Bundle bundle = new Bundle();
             bundle.putString("content", text);
 
@@ -68,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
             dialogFragment.setArguments(bundle);
             dialogFragment.show(getSupportFragmentManager(), "CLIPBOARD-INFO");
 
+            fragment.getmAdapter().notifyDataSetChanged();
         });
+    }
+
+    private void init() {
+        //load TextSet and PageGenerator
+        TextSet textSet = TextSetHelper.get();
+        Utils.setStoragePath(this);
+        textSet.load();
+        PageGenerator.setTextSet(textSet);
+        Log.e("DEBUG", PageGenerator.generate());
     }
 }

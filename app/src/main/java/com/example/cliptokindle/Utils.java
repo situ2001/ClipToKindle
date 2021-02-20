@@ -3,7 +3,11 @@ package com.example.cliptokindle;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 
+import java.io.File;
+
 public class Utils {
+    private static File path;
+
     /**
      * Get IP address oof Wifi
      * @param context
@@ -21,5 +25,13 @@ public class Utils {
             int a = manager.getConnectionInfo().getIpAddress();
             return (a & 0xFF) + "." + (a >> 8 & 0xFF) + "." + (a >> 16 & 0xFF) + "." + (a >> 24 & 0xFF);
         }
+    }
+
+    public static void setStoragePath(Context c) {
+        path = c.getFilesDir();
+    }
+
+    public static File getStoragePath() {
+        return path;
     }
 }

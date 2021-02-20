@@ -12,18 +12,16 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
-    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-    private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60;
 
     protected RecyclerView mRecyclerView;
     protected CustomAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected List<String> mDataset;
+    protected List<Text> mDataset;
 
     public RecyclerViewFragment() {
         // Required empty public constructor
@@ -34,10 +32,11 @@ public class RecyclerViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //add sth into the list
-        mDataset = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            mDataset.add("TODO");
-        }
+        mDataset = TextSetHelper.getList();
+    }
+
+    public CustomAdapter getmAdapter() {
+        return mAdapter;
     }
 
     @Override
