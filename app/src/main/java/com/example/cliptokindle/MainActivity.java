@@ -2,7 +2,6 @@ package com.example.cliptokindle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ClipboardManager;
@@ -11,9 +10,20 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cliptokindle.fragment.RecyclerViewFragment;
+import com.example.cliptokindle.text.Text;
+import com.example.cliptokindle.text.TextSet;
+import com.example.cliptokindle.text.TextSetHelper;
+import com.example.cliptokindle.util.HttpApp;
+import com.example.cliptokindle.util.PageGenerator;
+import com.example.cliptokindle.util.Utils;
+
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +71,16 @@ public class MainActivity extends AppCompatActivity {
             }
             text = manager.getPrimaryClip().getItemAt(0).getText().toString();
 
+            TextSetHelper.get().add(new Text(text));
+
+            /* Temporarily not use
             Bundle bundle = new Bundle();
             bundle.putString("content", text);
 
             DialogFragment dialogFragment = new ClipBoardDialogFragment();
             dialogFragment.setArguments(bundle);
-            dialogFragment.show(getSupportFragmentManager(), "CLIPBOARD-INFO");
+            dialogFragment.show(getSupportFragmentManager(), TAG);
+             */
 
             fragment.getmAdapter().notifyDataSetChanged();
         });

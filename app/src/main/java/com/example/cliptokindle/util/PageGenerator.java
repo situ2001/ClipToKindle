@@ -1,6 +1,8 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.util;
 
 import androidx.annotation.NonNull;
+
+import com.example.cliptokindle.text.TextSet;
 
 public class PageGenerator {
     private static StringBuilder msg;

@@ -1,8 +1,8 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.text;
 
 import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
+
+import com.example.cliptokindle.util.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 
 public class TextSet implements Serializable {
     private List<Text> texts;
-    private transient Context context;
 
     public TextSet() {
         texts = new ArrayList<>();
@@ -30,11 +29,6 @@ public class TextSet implements Serializable {
 
     public void remove(int i) {
         texts.remove(i);
-        this.save();
-    }
-
-    public void remove(Text s) {
-        texts.remove(s);
         this.save();
     }
 

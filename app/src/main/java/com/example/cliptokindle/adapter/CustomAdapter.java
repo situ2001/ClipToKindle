@@ -1,4 +1,4 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.example.cliptokindle.R;
+import com.example.cliptokindle.text.Text;
+import com.example.cliptokindle.text.TextSetHelper;
+
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
@@ -51,7 +54,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         public ViewHolder(View v) {
             super(v);
-            v.setOnClickListener(l -> Log.d(TAG, "Element " + getAdapterPosition() + " clicked."));
             this.textView = v.findViewById(R.id.textView);
             this.button = v.findViewById(R.id.button_remove);
         }

@@ -1,4 +1,4 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.util;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;

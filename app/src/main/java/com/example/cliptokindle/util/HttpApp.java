@@ -1,10 +1,9 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.util;
 
-import android.util.Log;
+import com.example.cliptokindle.text.Text;
+import com.example.cliptokindle.util.PageGenerator;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 

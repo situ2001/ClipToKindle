@@ -1,6 +1,4 @@
-package com.example.cliptokindle;
-
-import android.content.Context;
+package com.example.cliptokindle.text;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.cliptokindle;
+package com.example.cliptokindle.fragment;
 
 import android.os.Bundle;
 
@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.cliptokindle.R;
+import com.example.cliptokindle.adapter.CustomAdapter;
+import com.example.cliptokindle.text.Text;
+import com.example.cliptokindle.text.TextSetHelper;
+
 import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
@@ -31,8 +34,7 @@ public class RecyclerViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //add sth into the list
-        mDataset = TextSetHelper.getList();
+        mDataset = TextSetHelper.getList(); //initialize the dataset
     }
 
     public CustomAdapter getmAdapter() {
