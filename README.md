@@ -1,6 +1,6 @@
 # Clip To Kindle
 
-This is a very very basic Android app that sends the clipboard's content(almost are URLs) to Kindle ebook reader.
+This is a very very simple Android app that sends the contents(almost are URLs) of clipboard to Kindle ebook reader.
 
 ## How to use
 
@@ -15,7 +15,7 @@ Analogically, you can follow step 2 to add more items. After other items are add
 
 ## Todo(s)
 
-- [ ] check network (WiFi or hotspot)
+- [ ] Check network availability
 - [ ] Remove hardcode
 - [ ] UI improvement
-- [ ] more user-friendly experience
+- [ ] More user-friendly experience
