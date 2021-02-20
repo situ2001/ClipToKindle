@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.cliptokindle"
+        applicationId "com.situ2001.cliptokindle"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
