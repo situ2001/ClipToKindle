@@ -1,4 +1,4 @@
-package com.example.cliptokindle.fragment;
+package com.situ2001.cliptokindle.fragment;
 
 import android.os.Bundle;
 
@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cliptokindle.R;
-import com.example.cliptokindle.adapter.CustomAdapter;
-import com.example.cliptokindle.text.Text;
-import com.example.cliptokindle.text.TextSetHelper;
+import com.situ2001.cliptokindle.R;
+import com.situ2001.cliptokindle.adapter.CustomAdapter;
+import com.situ2001.cliptokindle.text.Text;
+import com.situ2001.cliptokindle.text.TextSetHelper;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.cliptokindle.text;
+package com.situ2001.cliptokindle.text;
 
 import java.io.Serializable;
 

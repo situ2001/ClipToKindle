@@ -1,4 +1,4 @@
-package com.example.cliptokindle;
+package com.situ2001.cliptokindle;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -10,19 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.cliptokindle.fragment.RecyclerViewFragment;
-import com.example.cliptokindle.text.Text;
-import com.example.cliptokindle.text.TextSet;
-import com.example.cliptokindle.text.TextSetHelper;
-import com.example.cliptokindle.util.HttpApp;
-import com.example.cliptokindle.util.PageGenerator;
-import com.example.cliptokindle.util.Utils;
+import com.situ2001.cliptokindle.fragment.RecyclerViewFragment;
+import com.situ2001.cliptokindle.text.Text;
+import com.situ2001.cliptokindle.text.TextSet;
+import com.situ2001.cliptokindle.text.TextSetHelper;
+import com.situ2001.cliptokindle.util.HttpApp;
+import com.situ2001.cliptokindle.util.PageGenerator;
+import com.situ2001.cliptokindle.util.Utils;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+
+    private HttpApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         SwitchCompat switchServer = findViewById(R.id.switch_server);
 
         ClipboardManager manager = getSystemService(ClipboardManager.class);
-        HttpApp app = new HttpApp();
 
+        app = new HttpApp();
         switchServer.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 try {
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                     tvHttpServerStatus.setText("Failed to start server.");
+                   buttonView.setChecked(false);
                 }
             } else {
                 app.stop();
@@ -85,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
             TextSetHelper.get().add(new Text(text));
-
-            finalFragment.getmAdapter().notifyDataSetChanged();
+            finalFragment.getmAdapter().notifyItemInserted(TextSetHelper.getList().size() - 1);
 
             Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
         });

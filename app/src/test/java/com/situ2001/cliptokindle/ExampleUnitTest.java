@@ -1,4 +1,4 @@
-package com.example.cliptokindle;
+package com.situ2001.cliptokindle;
 
 import org.junit.Test;
 

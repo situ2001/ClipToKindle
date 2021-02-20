@@ -1,4 +1,4 @@
-package com.example.cliptokindle.adapter;
+package com.situ2001.cliptokindle.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cliptokindle.R;
-import com.example.cliptokindle.text.Text;
-import com.example.cliptokindle.text.TextSetHelper;
+import com.situ2001.cliptokindle.R;
+import com.situ2001.cliptokindle.text.Text;
+import com.situ2001.cliptokindle.text.TextSetHelper;
 
 import java.util.List;
 

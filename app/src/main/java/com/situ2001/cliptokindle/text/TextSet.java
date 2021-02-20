@@ -1,6 +1,6 @@
-package com.example.cliptokindle.text;
+package com.situ2001.cliptokindle.text;
 
-import com.example.cliptokindle.util.Utils;
+import com.situ2001.cliptokindle.util.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +42,6 @@ public class TextSet implements Serializable {
     }
 
     public void save() {
-        System.out.println(this.getClass().getTypeName());
         new Serializer(new File(Utils.getStoragePath(), "TextSet.dat")).save(this.texts);
     }
 

@@ -1,7 +1,6 @@
-package com.example.cliptokindle.util;
+package com.situ2001.cliptokindle.util;
 
-import com.example.cliptokindle.text.Text;
-import com.example.cliptokindle.util.PageGenerator;
+import com.situ2001.cliptokindle.text.Text;
 
 import java.io.IOException;
 
