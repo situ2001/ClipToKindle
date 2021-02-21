@@ -20,17 +20,22 @@ public class TextSet implements Serializable {
         texts = new ArrayList<>();
     }
 
-    public void add(Text s) {
-        boolean predicate = texts.stream().anyMatch(text -> text.getText().equals(s.getText()));
-        if (!predicate) {
-            texts.add(s);
-            this.save();
+    public void add(Text t) {
+        if (t.getText().trim().matches("http[\\w]?://.*")) {
+            if (!contains(t)) {
+                texts.add(t);
+                save();
+            }
         }
     }
 
     public void remove(int i) {
         texts.remove(i);
         this.save();
+    }
+
+    public boolean contains(Text t) {
+        return texts.stream().anyMatch(text -> text.getText().equals(t.getText()));
     }
 
     public void forEach(Consumer<? super Text> c) {

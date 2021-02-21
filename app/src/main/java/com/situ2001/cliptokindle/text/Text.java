@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 //link html object
 public class Text implements Serializable {
-    private String text;
+    private final String text;
 
     public Text(String text) {
         this.text = text;

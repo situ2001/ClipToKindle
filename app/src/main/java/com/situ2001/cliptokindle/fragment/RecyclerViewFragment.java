@@ -47,7 +47,7 @@ public class RecyclerViewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_recycler_view, container, false);
         rootView.setTag(TAG);
 
-        mRecyclerView = rootView.findViewById(R.id.recycleView);
+        mRecyclerView = rootView.findViewById(R.id.recycle_view);
 
         //set LayoutManager
         mLayoutManager = new LinearLayoutManager(getActivity());

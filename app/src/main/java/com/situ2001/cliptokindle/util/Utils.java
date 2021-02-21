@@ -8,22 +8,32 @@ import java.io.File;
 public class Utils {
     private static File path;
 
-    /**
-     * Get IP address oof Wifi
-     * @param context
-     * @return
-     */
-    public static String getIpAddress(Context context) {
+    public static int getWifiStatus(Context context) {
         WifiManager manager = context.getSystemService(WifiManager.class);
         if (manager == null) {
-            return "No Wifi";
+            return 0;
         } else if (!manager.isWifiEnabled()) {
-            return "Wifi is disabled";
+            return 1;
         } else if (manager.getConnectionInfo() == null) {
-            return "Wifi is not connected";
+            return 2;
         } else {
-            int a = manager.getConnectionInfo().getIpAddress();
-            return (a & 0xFF) + "." + (a >> 8 & 0xFF) + "." + (a >> 16 & 0xFF) + "." + (a >> 24 & 0xFF);
+            return manager.getConnectionInfo().getIpAddress();
+        }
+    }
+
+    /**
+     * Get the hint of server status
+     * @param a the value returned from getWifiStatus(Context context)
+     * @return A String that indicate the status of server
+     */
+    public static String getHint(int a) {
+        switch (a) {
+            case 0: return "No Wifi";
+            case 1: return "Wifi is disabled";
+            case 2: return "Wifi is not connected";
+            default: return "Listening on port 8080\n IP address: " +
+                    (a & 0xFF) + "." + (a >> 8 & 0xFF) + "." +
+                    (a >> 16 & 0xFF) + "." + (a >> 24 & 0xFF);
         }
     }
 

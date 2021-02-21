@@ -16,7 +16,6 @@ import com.situ2001.cliptokindle.text.TextSetHelper;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-    private static final String TAG = "CustomAdapter";
     private final List<Text> mDataSet;
 
     public CustomAdapter(List<Text> mDataSet) {
@@ -53,7 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         public ViewHolder(View v) {
             super(v);
-            this.textView = v.findViewById(R.id.textView);
+            this.textView = v.findViewById(R.id.text_view);
             this.button = v.findViewById(R.id.button_remove);
         }
 

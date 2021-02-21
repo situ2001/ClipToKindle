@@ -2,6 +2,7 @@ package com.situ2001.cliptokindle;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-        TextView tvHttpServerStatus = findViewById(R.id.httpServerStatus);
-        Button btClipBoard = findViewById(R.id.getClipBoardText);
+        TextView tvHttpServerStatus = findViewById(R.id.http_server_status);
+        Button btClipBoard = findViewById(R.id.get_clip_board_text);
         SwitchCompat switchServer = findViewById(R.id.switch_server);
 
         ClipboardManager manager = getSystemService(ClipboardManager.class);
@@ -53,17 +54,15 @@ public class MainActivity extends AppCompatActivity {
             if (isChecked) {
                 try {
                     app.start();
-                    tvHttpServerStatus.setText(
-                            "Listening on port 8080\nIP address: " + Utils.getIpAddress(this)
-                    );
+                    tvHttpServerStatus.setText(Utils.getHint(Utils.getWifiStatus(this)));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    tvHttpServerStatus.setText("Failed to start server.");
+                    tvHttpServerStatus.setText(R.string.fail_to_start_server);
                    buttonView.setChecked(false);
                 }
             } else {
                 app.stop();
-                tvHttpServerStatus.setText("Server is off");
+                tvHttpServerStatus.setText(R.string.server_is_off);
             }
         });
         switchServer.setChecked(true);
@@ -75,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
+            if (TextSetHelper.get().contains(new Text(text))) {
+                Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
+                return;
+            }
             TextSetHelper.get().add(new Text(text));
 
             finalFragment.getmAdapter().notifyDataSetChanged();
@@ -99,5 +102,6 @@ public class MainActivity extends AppCompatActivity {
         Utils.setStoragePath(this);
         textSet.load();
         PageGenerator.build(textSet);
+        Log.i(TAG, PageGenerator.getPageGenerator().generate());
     }
 }
