@@ -1,4 +1,4 @@
-package com.situ2001.cliptokindle.text;
+package com.situ2001.cliptokindle.bean.text;
 
 import java.util.List;
 

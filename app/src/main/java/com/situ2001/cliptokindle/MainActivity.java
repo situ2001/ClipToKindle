@@ -12,9 +12,9 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.situ2001.cliptokindle.fragment.RecyclerViewFragment;
-import com.situ2001.cliptokindle.text.Text;
-import com.situ2001.cliptokindle.text.TextSet;
-import com.situ2001.cliptokindle.text.TextSetHelper;
+import com.situ2001.cliptokindle.bean.text.Text;
+import com.situ2001.cliptokindle.bean.text.TextSet;
+import com.situ2001.cliptokindle.bean.text.TextSetHelper;
 import com.situ2001.cliptokindle.util.HttpApp;
 import com.situ2001.cliptokindle.util.PageGenerator;
 import com.situ2001.cliptokindle.util.Utils;

@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.situ2001.cliptokindle.R;
-import com.situ2001.cliptokindle.text.Text;
-import com.situ2001.cliptokindle.text.TextSetHelper;
+import com.situ2001.cliptokindle.bean.text.Text;
+import com.situ2001.cliptokindle.bean.text.TextSetHelper;
 
 import java.util.List;
 

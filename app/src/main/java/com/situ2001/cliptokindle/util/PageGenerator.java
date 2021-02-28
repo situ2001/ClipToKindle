@@ -2,7 +2,7 @@ package com.situ2001.cliptokindle.util;
 
 import androidx.annotation.NonNull;
 
-import com.situ2001.cliptokindle.text.TextSet;
+import com.situ2001.cliptokindle.bean.text.TextSet;
 
 public class PageGenerator {
     private static PageGenerator pageGenerator;
