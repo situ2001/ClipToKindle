@@ -1,5 +1,6 @@
 package com.situ2001.cliptokindle.bean.text;
 
+import com.situ2001.cliptokindle.util.Serializer;
 import com.situ2001.cliptokindle.util.Utils;
 
 import java.io.File;
@@ -47,39 +48,14 @@ public class TextSet implements Serializable {
     }
 
     public void save() {
-        new Serializer(new File(Utils.getStoragePath(), "TextSet.dat")).save(this.texts);
+        new Serializer("TextSet.dat").save(this.texts);
     }
 
     public void load() {
-        Object o = new Serializer(new File(Utils.getStoragePath(), "TextSet.dat")).load();
+        Object o = new Serializer("TextSet.dat").load();
         if (o instanceof ArrayList) {
             this.texts = (ArrayList<Text>) o;
         }
     }
 
-    static class Serializer {
-        private final File file;
-
-        Serializer(File file) {
-            this.file = file;
-        }
-
-        public void save(Object o) {
-            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
-                out.writeObject(o);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public Object load() {
-            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-                return in.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-    }
 }

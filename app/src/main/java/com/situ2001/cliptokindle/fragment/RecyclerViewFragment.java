@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.situ2001.cliptokindle.R;
-import com.situ2001.cliptokindle.adapter.CustomAdapter;
+import com.situ2001.cliptokindle.adapter.RecyclerViewAdapter;
 import com.situ2001.cliptokindle.bean.text.Text;
 import com.situ2001.cliptokindle.bean.text.TextSetHelper;
 
@@ -22,7 +22,7 @@ public class RecyclerViewFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
 
     protected RecyclerView mRecyclerView;
-    protected CustomAdapter mAdapter;
+    protected RecyclerViewAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected List<Text> mDataset;
 
@@ -37,7 +37,7 @@ public class RecyclerViewFragment extends Fragment {
         mDataset = TextSetHelper.getList(); //initialize the dataset
     }
 
-    public CustomAdapter getmAdapter() {
+    public RecyclerViewAdapter getmAdapter() {
         return mAdapter;
     }
 
@@ -54,7 +54,7 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //set Adapter
-        mAdapter = new CustomAdapter(mDataset);
+        mAdapter = new RecyclerViewAdapter(mDataset);
         mRecyclerView.setAdapter(mAdapter);
 
         return rootView;

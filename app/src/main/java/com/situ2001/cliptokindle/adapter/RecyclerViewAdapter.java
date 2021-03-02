@@ -15,10 +15,10 @@ import com.situ2001.cliptokindle.bean.text.TextSetHelper;
 
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private final List<Text> mDataSet;
 
-    public CustomAdapter(List<Text> mDataSet) {
+    public RecyclerViewAdapter(List<Text> mDataSet) {
         this.mDataSet = mDataSet;
     }
 
