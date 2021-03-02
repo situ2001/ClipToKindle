@@ -15,10 +15,6 @@ public class Serializer {
         this.file = new File(Utils.getStoragePath(), filename);
     }
 
-    private Serializer(File file) {
-        this.file = file;
-    }
-
     public void save(Object o) {
         if (o instanceof Serializable) {
             try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {

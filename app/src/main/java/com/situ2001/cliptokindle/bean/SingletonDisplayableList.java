@@ -4,7 +4,6 @@ public class SingletonDisplayableList {
     private static DisplayableList singletonList;
 
     public static synchronized DisplayableList getSingleton() {
-
         if (singletonList == null) {
             singletonList = new DisplayableList();
         }

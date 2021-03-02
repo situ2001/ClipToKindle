@@ -24,6 +24,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static DisplayableList list;
 
     private HttpApp app;
 
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        DisplayableList list = SingletonDisplayableList.getSingleton();
 
         init();
 
@@ -103,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         Utils.setStoragePath(this);
+        //TODO change the vexing init logic...
+        list = SingletonDisplayableList.getSingleton();
         PageGenerator.build(SingletonDisplayableList.getSingleton());
         Log.i(TAG, PageGenerator.getPageGenerator().generate());
     }

@@ -12,8 +12,11 @@ public class DisplayableList implements Serializable {
     private final Serializer serializer;
 
     public DisplayableList() {
-        list = new ArrayList<>();
         serializer = new Serializer("list.dat");
+        list = (ArrayList<Displayable>) serializer.load();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
     }
 
     public void add(Displayable o) {
@@ -44,9 +47,5 @@ public class DisplayableList implements Serializable {
 
     public void show() {
         list.forEach(System.out::print);
-    }
-
-    public static DisplayableList loadFromFile() {
-        return (DisplayableList) new Serializer("list.dat").load();
     }
 }
