@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.situ2001.cliptokindle.bean.DisplayableList;
+import com.situ2001.cliptokindle.bean.SingletonDisplayableList;
 import com.situ2001.cliptokindle.fragment.RecyclerViewFragment;
 import com.situ2001.cliptokindle.bean.text.Text;
-import com.situ2001.cliptokindle.bean.text.TextSet;
-import com.situ2001.cliptokindle.bean.text.TextSetHelper;
 import com.situ2001.cliptokindle.util.HttpApp;
 import com.situ2001.cliptokindle.util.PageGenerator;
 import com.situ2001.cliptokindle.util.Utils;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DisplayableList list = SingletonDisplayableList.getSingleton();
 
         init();
 
@@ -74,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-            if (TextSetHelper.get().contains(new Text(text))) {
+
+            if (list.contains(new Text(text))) {
                 Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
                 return;
             }
-            TextSetHelper.get().add(new Text(text));
+
+            list.add(new Text(text));
 
             finalFragment.getmAdapter().notifyDataSetChanged();
         });
@@ -90,18 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-            TextSetHelper.get().add(new Text(text));
-            finalFragment.getmAdapter().notifyItemInserted(TextSetHelper.getList().size() - 1);
+            list.add(new Text(text));
+            finalFragment.getmAdapter().notifyItemInserted(list.size() - 1);
 
             Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
         });
     }
 
     private void init() {
-        TextSet textSet = TextSetHelper.get();
         Utils.setStoragePath(this);
-        textSet.load();
-        PageGenerator.build(textSet);
+        PageGenerator.build(SingletonDisplayableList.getSingleton());
         Log.i(TAG, PageGenerator.getPageGenerator().generate());
     }
 }

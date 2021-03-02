@@ -2,25 +2,25 @@ package com.situ2001.cliptokindle.util;
 
 import androidx.annotation.NonNull;
 
-import com.situ2001.cliptokindle.bean.text.TextSet;
+import com.situ2001.cliptokindle.bean.DisplayableList;
 
 public class PageGenerator {
     private static PageGenerator pageGenerator;
 
     private StringBuilder msg;
-    private final TextSet textSet;
+    private final DisplayableList list;
 
     public static PageGenerator getPageGenerator() {
         return pageGenerator;
     }
 
-    private PageGenerator(TextSet textSet) {
-        this.textSet = textSet;
+    private PageGenerator(DisplayableList list) {
+        this.list = list;
     }
 
-    public synchronized static void build(TextSet textSet) {
+    public synchronized static void build(DisplayableList list) {
         if (pageGenerator == null) {
-            pageGenerator = new PageGenerator(textSet);
+            pageGenerator = new PageGenerator(list);
         }
     }
 
@@ -29,7 +29,7 @@ public class PageGenerator {
         msg = new StringBuilder();
 
         begin();
-        textSet.forEach(text -> msg.append(text.toHtml()));
+        list.forEach(text -> msg.append(text.toHtml()));
         end();
 
         return msg.toString();

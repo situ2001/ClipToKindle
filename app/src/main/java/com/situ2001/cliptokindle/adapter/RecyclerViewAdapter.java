@@ -10,15 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.situ2001.cliptokindle.R;
-import com.situ2001.cliptokindle.bean.text.Text;
-import com.situ2001.cliptokindle.bean.text.TextSetHelper;
-
-import java.util.List;
+import com.situ2001.cliptokindle.bean.DisplayableList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private final List<Text> mDataSet;
+    private final DisplayableList mDataSet;
 
-    public RecyclerViewAdapter(List<Text> mDataSet) {
+    public RecyclerViewAdapter(DisplayableList mDataSet) {
         this.mDataSet = mDataSet;
     }
 
@@ -33,10 +30,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.getTextView().setText(mDataSet.get(position).getText());
+        viewHolder.getTextView().setText(mDataSet.get(position).getTitle());
         viewHolder.getButton().setOnClickListener(l -> {
             int pos = viewHolder.getAdapterPosition();
-            TextSetHelper.get().remove(pos);
+            mDataSet.remove(pos);
             this.notifyItemRemoved(pos);
         });
     }
