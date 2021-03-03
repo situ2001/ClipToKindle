@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import fi.iki.elonen.NanoHTTPD;
 
+/**
+ * The class derived from NanoHTTPD is used to serving a static page.
+ */
 public class HttpApp extends NanoHTTPD {
 
     public HttpApp() {

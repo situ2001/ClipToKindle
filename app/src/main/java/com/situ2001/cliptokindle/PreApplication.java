@@ -7,6 +7,9 @@ import com.situ2001.cliptokindle.bean.SingletonDisplayableList;
 import com.situ2001.cliptokindle.util.PageGenerator;
 import com.situ2001.cliptokindle.util.Utils;
 
+/**
+ * Do preparation before MainActivity creates.
+ */
 public class PreApplication extends Application {
     private final String TAG = "PreApplication";
 

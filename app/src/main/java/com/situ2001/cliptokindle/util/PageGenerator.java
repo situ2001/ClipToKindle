@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 
 import com.situ2001.cliptokindle.bean.DisplayableList;
 
+/**
+ * A simple tool for generating static web page
+ */
 public class PageGenerator {
     private static PageGenerator pageGenerator;
 
@@ -18,6 +21,10 @@ public class PageGenerator {
         this.displayableList = displayableList;
     }
 
+    /**
+     * build a PageGenerator
+     * @param list An DisplayList that will be used by PageGenerator
+     */
     public synchronized static void build(DisplayableList list) {
         if (pageGenerator == null) {
             pageGenerator = new PageGenerator(list);

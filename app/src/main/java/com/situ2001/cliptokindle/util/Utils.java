@@ -6,10 +6,14 @@ import android.net.wifi.WifiManager;
 import java.io.File;
 
 public class Utils {
-    private static File path;
+    private static File storagePath;
 
-    public static int getWifiStatus(Context context) {
-        WifiManager manager = context.getSystemService(WifiManager.class);
+    /**
+     * Get wifi status by using a WifiManager
+     * @param manager An WifiManager instance
+     * @return 0, 1, 2 that indicate the Wifi status or a raw IP address
+     */
+    public static int getWifiStatus(WifiManager manager) {
         if (manager == null) {
             return 0;
         } else if (!manager.isWifiEnabled()) {
@@ -23,7 +27,7 @@ public class Utils {
 
     /**
      * Get the hint of server status
-     * @param a the value returned from getWifiStatus(Context context)
+     * @param a The value returned from getWifiStatus(Context context)
      * @return A String that indicate the status of server
      */
     public static String getHint(int a) {
@@ -37,11 +41,19 @@ public class Utils {
         }
     }
 
+    /**
+     * Set the path by using the Context passed into this method.
+     * @param c A Context
+     */
     public static void setStoragePath(Context c) {
-        path = c.getFilesDir();
+        storagePath = c.getFilesDir();
     }
 
+    /**
+     * Getter for storagePath
+     * @return The path of the directory holding application files.
+     */
     public static File getStoragePath() {
-        return path;
+        return storagePath;
     }
 }

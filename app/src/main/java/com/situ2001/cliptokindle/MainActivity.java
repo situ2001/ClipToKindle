@@ -1,6 +1,7 @@
 package com.situ2001.cliptokindle;
 
 import android.content.ClipboardManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
             if (isChecked) {
                 try {
                     app.start();
-                    tvHttpServerStatus.setText(Utils.getHint(Utils.getWifiStatus(this)));
+                    tvHttpServerStatus.setText(Utils.getHint(Utils
+                            .getWifiStatus(getSystemService(WifiManager.class))));
                 } catch (IOException e) {
                     e.printStackTrace();
                     tvHttpServerStatus.setText(R.string.fail_to_start_server);
