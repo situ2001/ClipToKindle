@@ -8,14 +8,14 @@ public class PageGenerator {
     private static PageGenerator pageGenerator;
 
     private StringBuilder msg;
-    private final DisplayableList list;
+    private final DisplayableList displayableList;
 
     public static PageGenerator getPageGenerator() {
         return pageGenerator;
     }
 
-    private PageGenerator(DisplayableList list) {
-        this.list = list;
+    private PageGenerator(DisplayableList displayableList) {
+        this.displayableList = displayableList;
     }
 
     public synchronized static void build(DisplayableList list) {
@@ -29,7 +29,7 @@ public class PageGenerator {
         msg = new StringBuilder();
 
         begin();
-        list.forEach(text -> msg.append(text.toHtml()));
+        displayableList.forEach(text -> msg.append(text.toHtml()));
         end();
 
         return msg.toString();

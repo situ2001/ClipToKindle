@@ -2,7 +2,6 @@ package com.situ2001.cliptokindle;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +15,6 @@ import com.situ2001.cliptokindle.bean.SingletonDisplayableList;
 import com.situ2001.cliptokindle.fragment.RecyclerViewFragment;
 import com.situ2001.cliptokindle.bean.text.Text;
 import com.situ2001.cliptokindle.util.HttpApp;
-import com.situ2001.cliptokindle.util.PageGenerator;
 import com.situ2001.cliptokindle.util.Utils;
 
 import java.io.IOException;
@@ -24,8 +22,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static DisplayableList list;
-
+    private static DisplayableList displayableList;
     private HttpApp app;
 
     @Override
@@ -33,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
-
-        //show RecycleViewFragment
+        //set and show RecycleViewFragment
         RecyclerViewFragment fragment = null;
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -44,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
         }
 
+        //initialize the variables
+        app = new HttpApp();
+        displayableList = SingletonDisplayableList.getSingleton();
+        ClipboardManager manager = getSystemService(ClipboardManager.class);
         TextView tvHttpServerStatus = findViewById(R.id.http_server_status);
         Button btClipBoard = findViewById(R.id.get_clip_board_text);
         SwitchCompat switchServer = findViewById(R.id.switch_server);
 
-        ClipboardManager manager = getSystemService(ClipboardManager.class);
-
-        app = new HttpApp();
         switchServer.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 try {
@@ -68,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
         switchServer.setChecked(true);
 
+        //listening to clipboard
         RecyclerViewFragment finalFragment = fragment; // an effectively final variable
         btClipBoard.setOnClickListener(l -> {
             if (!manager.hasPrimaryClip()) {
@@ -76,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
 
-            if (list.contains(new Text(text))) {
+            if (displayableList.contains(new Text(text))) {
                 Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            list.add(new Text(text));
+            displayableList.add(new Text(text));
 
             finalFragment.getmAdapter().notifyDataSetChanged();
         });
@@ -93,18 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-            list.add(new Text(text));
-            finalFragment.getmAdapter().notifyItemInserted(list.size() - 1);
+            displayableList.add(new Text(text));
+            finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
 
             Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
         });
-    }
-
-    private void init() {
-        Utils.setStoragePath(this);
-        //TODO change the vexing init logic...
-        list = SingletonDisplayableList.getSingleton();
-        PageGenerator.build(SingletonDisplayableList.getSingleton());
-        Log.i(TAG, PageGenerator.getPageGenerator().generate());
     }
 }
