@@ -10,7 +10,7 @@ import com.situ2001.cliptokindle.util.Utils;
 /**
  * Do preparation before MainActivity creates.
  */
-public class PreApplication extends Application {
+public class ClipToKindleApplication extends Application {
     private final String TAG = "PreApplication";
 
     @Override

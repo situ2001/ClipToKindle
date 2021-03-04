@@ -13,7 +13,7 @@ public class DisplayableList implements Serializable {
     private final Serializer serializer;
 
     public DisplayableList() {
-        serializer = new Serializer("list.dat");
+        serializer = new Serializer("DisplayableList.dat");
         list = (ArrayList<Displayable>) serializer.load();
         if (list == null) {
             list = new ArrayList<>();
@@ -21,8 +21,10 @@ public class DisplayableList implements Serializable {
     }
 
     public void add(Displayable o) {
-        list.add(o);
-        serializer.save(list);
+        if (o != null) {
+            list.add(o);
+            serializer.save(list);
+        }
     }
 
     public void remove(int index) {
@@ -42,11 +44,12 @@ public class DisplayableList implements Serializable {
         list.forEach(c);
     }
 
-    public boolean contains(Text t) {
-        return list.stream().anyMatch(text -> ((Text) text).getText().equals(t.getText()));
-    }
+    public boolean contains(Displayable t) {
+        for (Displayable e : list) {
+            if (e.equals(t))
+                return true;
+        }
 
-    public void show() {
-        list.forEach(System.out::print);
+        return false;
     }
 }

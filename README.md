@@ -16,6 +16,6 @@ Analogically, you can follow step 2 to add more items. After other items are add
 ## Todo(s)
 
 - [ ] Check network availability
-- [ ] Remove hardcode
+- [x] ~~Remove hardcode~~
 - [ ] UI improvement
 - [ ] More user-friendly experience

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Text implements Serializable, Displayable {
     private final String text;
 
-    public Text(String text) {
+    private Text(String text) {
         this.text = text;
     }
 
@@ -22,5 +22,23 @@ public class Text implements Serializable, Displayable {
     @Override
     public String getTitle() {
         return text;
+    }
+
+    public static Text build(String text) {
+        if (text != null) {
+            return new Text(text);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Text) {
+            return text.equals(((Text) o).getText());
+        }
+
+        //If the o passed into this method is not a Text
+        return false;
     }
 }

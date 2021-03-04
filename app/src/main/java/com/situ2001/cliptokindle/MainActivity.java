@@ -75,12 +75,14 @@ public class MainActivity extends AppCompatActivity {
             }
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
 
-            if (displayableList.contains(new Text(text))) {
+            Text textObj = Text.build(text);
+
+            if (displayableList.contains(textObj)) {
                 Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            displayableList.add(new Text(text));
+            displayableList.add(textObj);
 
             finalFragment.getmAdapter().notifyDataSetChanged();
         });
@@ -91,8 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "No text in clipboard", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-            displayableList.add(new Text(text));
+            Text textObj = Text.build(text);
+            if (displayableList.contains(textObj)) {
+                Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            displayableList.add(Text.build(text));
             finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
 
             Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
