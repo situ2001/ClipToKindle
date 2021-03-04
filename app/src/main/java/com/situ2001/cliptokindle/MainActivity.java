@@ -69,42 +69,34 @@ public class MainActivity extends AppCompatActivity {
         //listening to clipboard
         RecyclerViewFragment finalFragment = fragment; // an effectively final variable
         btClipBoard.setOnClickListener(l -> {
-            if (!manager.hasPrimaryClip()) {
+            if (manager.hasPrimaryClip()) {
+                String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
+                Text textObj = Text.build(text);
+                if (!displayableList.contains(textObj)) {
+                    displayableList.add(textObj);
+                    //finalFragment.getmAdapter().notifyDataSetChanged();
+                    finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
+                } else {
+                    Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
+                }
+            } else {
                 Toast.makeText(this, "No text in clipboard", Toast.LENGTH_SHORT).show();
-                return;
             }
-            String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-
-            Text textObj = Text.build(text);
-
-            if (displayableList.contains(textObj)) {
-                Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            displayableList.add(textObj);
-
-            finalFragment.getmAdapter().notifyDataSetChanged();
         });
 
         //listening to clipboard
         manager.addPrimaryClipChangedListener(() -> {
-            if (!manager.hasPrimaryClip()) {
+            if (manager.hasPrimaryClip()) {
+                String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
+                Text textObj = Text.build(text);
+                if (!displayableList.contains(textObj)) {
+                    displayableList.add(Text.build(text));
+                    finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
+                    Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
+                }
+            } else {
                 Toast.makeText(this, "No text in clipboard", Toast.LENGTH_SHORT).show();
-                return;
             }
-
-            String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-            Text textObj = Text.build(text);
-            if (displayableList.contains(textObj)) {
-                Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            displayableList.add(Text.build(text));
-            finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
-
-            Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
         });
     }
 }

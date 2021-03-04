@@ -45,11 +45,6 @@ public class DisplayableList implements Serializable {
     }
 
     public boolean contains(Displayable t) {
-        for (Displayable e : list) {
-            if (e.equals(t))
-                return true;
-        }
-
-        return false;
+        return list.stream().anyMatch(e -> e.equals(t));
     }
 }
