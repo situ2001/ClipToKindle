@@ -1,9 +1,7 @@
 package com.situ2001.cliptokindle.bean;
 
-import com.situ2001.cliptokindle.bean.text.Text;
 import com.situ2001.cliptokindle.util.Serializer;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;

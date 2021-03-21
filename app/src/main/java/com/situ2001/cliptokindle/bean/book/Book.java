@@ -2,10 +2,7 @@ package com.situ2001.cliptokindle.bean.book;
 
 import android.net.Uri;
 
-import androidx.annotation.Nullable;
-
 import com.situ2001.cliptokindle.bean.Displayable;
-import com.situ2001.cliptokindle.bean.text.Text;
 
 import java.io.Serializable;
 

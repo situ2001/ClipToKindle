@@ -14,25 +14,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.situ2001.cliptokindle.bean.Displayable;
 import com.situ2001.cliptokindle.bean.DisplayableList;
 import com.situ2001.cliptokindle.bean.SingletonDisplayableList;
 import com.situ2001.cliptokindle.bean.book.Book;
 import com.situ2001.cliptokindle.fragment.RecyclerViewFragment;
-import com.situ2001.cliptokindle.bean.text.Text;
+import com.situ2001.cliptokindle.bean.link.Link;
 import com.situ2001.cliptokindle.util.HttpApp;
 import com.situ2001.cliptokindle.util.Utils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
         btClipBoard.setOnClickListener(l -> {
             if (manager.hasPrimaryClip()) {
                 String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-                Text textObj = Text.build(text);
-                if (!displayableList.contains(textObj)) {
-                    displayableList.add(textObj);
+                Link linkObj = Link.build(text);
+                if (!displayableList.contains(linkObj)) {
+                    displayableList.add(linkObj);
                     finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
                 } else {
                     Toast.makeText(this, "Item already exists", Toast.LENGTH_SHORT).show();
@@ -105,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
         manager.addPrimaryClipChangedListener(() -> {
             if (manager.hasPrimaryClip()) {
                 String text = manager.getPrimaryClip().getItemAt(0).getText().toString();
-                Text textObj = Text.build(text);
-                if (!displayableList.contains(textObj)) {
-                    displayableList.add(Text.build(text));
+                Link linkObj = Link.build(text);
+                if (!displayableList.contains(linkObj)) {
+                    displayableList.add(Link.build(text));
                     finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
                     Toast.makeText(this, "Added to list", Toast.LENGTH_SHORT).show();
                 }

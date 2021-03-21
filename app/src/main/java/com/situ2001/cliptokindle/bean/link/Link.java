@@ -1,13 +1,13 @@
-package com.situ2001.cliptokindle.bean.text;
+package com.situ2001.cliptokindle.bean.link;
 
 import com.situ2001.cliptokindle.bean.Displayable;
 
 import java.io.Serializable;
 
-public class Text implements Serializable, Displayable {
+public class Link implements Serializable, Displayable {
     private final String text;
 
-    private Text(String text) {
+    private Link(String text) {
         this.text = text;
     }
 
@@ -24,9 +24,9 @@ public class Text implements Serializable, Displayable {
         return text;
     }
 
-    public static Text build(String text) {
+    public static Link build(String text) {
         if (text != null) {
-            return new Text(text);
+            return new Link(text);
         }
 
         return null;
@@ -34,8 +34,8 @@ public class Text implements Serializable, Displayable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Text) {
-            return text.equals(((Text) o).getText());
+        if (o instanceof Link) {
+            return text.equals(((Link) o).getText());
         }
 
         //If the o passed into this method is not a Text
