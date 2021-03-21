@@ -1,5 +1,6 @@
 package com.situ2001.cliptokindle.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.net.wifi.WifiManager;
@@ -8,6 +9,7 @@ import java.io.File;
 
 public class Utils {
     private static File storagePath;
+    @SuppressLint("StaticFieldLeak")
     private static ContextWrapper contextWrapper;
 
     /**

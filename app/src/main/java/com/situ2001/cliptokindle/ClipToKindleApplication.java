@@ -17,8 +17,8 @@ public class ClipToKindleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.setStoragePath(this);
+        Utils.setContextWrapper(this);
         PageGenerator.build(SingletonDisplayableList.getSingleton());
         Log.e(TAG, PageGenerator.getPageGenerator().generate());
-        Utils.setContextWrapper(this);
     }
 }

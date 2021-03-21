@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 
 public class DisplayableList implements Serializable {
     private java.util.List<Displayable> list;
-    private java.util.Map<String, Uri> fileMap; // add a map
+    private java.util.Map<String, Uri> fileMap;
     private final Serializer serializer;
 
     public DisplayableList() {
