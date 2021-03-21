@@ -29,13 +29,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import fi.iki.elonen.NanoHTTPD;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static DisplayableList displayableList;
     private HttpApp app;
     private RecyclerViewFragment finalFragment;
-    private Map<String, InputStream> fileMap;
+    private Map<String, Uri> fileMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,27 +126,13 @@ public class MainActivity extends AppCompatActivity {
             Book book = new Book(uri, getFileName(uri));
             if (!displayableList.contains(book)) {
                 // update fileMap
-                try {
-                    fileMap.put(book.getTitle(), getContentResolver().openInputStream(book.toUri()));
-                    app.updateFileMap(fileMap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                fileMap.put(book.getTitle(), book.toUri());
+                app.updateFileMap(fileMap);
                 System.out.println(fileMap);
 
                 // add this Book to DisplayableList
                 displayableList.add(book);
                 finalFragment.getmAdapter().notifyItemInserted(displayableList.size() - 1);
-
-                // will be removed later
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(book.toUri());
-                    byte[] buffer = new byte[inputStream.available()];
-                    inputStream.read(buffer);
-                    System.out.println(buffer.length);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
@@ -182,13 +170,9 @@ public class MainActivity extends AppCompatActivity {
         // initialize the fileMap
         displayableList.forEach(displayable -> {
             if (displayable instanceof Book) {
-                try {
-                    fileMap.put(displayable.getTitle(),
-                            getContentResolver().openInputStream(((Book) displayable).toUri()));
-                    app.updateFileMap(fileMap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                fileMap.put(displayable.getTitle(), ((Book) displayable).toUri());
+                app.updateFileMap(fileMap);
+                System.out.println(((Book) displayable).toUri());
             }
         });
     }

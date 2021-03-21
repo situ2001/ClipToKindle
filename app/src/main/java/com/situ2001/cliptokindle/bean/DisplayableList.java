@@ -1,5 +1,7 @@
 package com.situ2001.cliptokindle.bean;
 
+import android.net.Uri;
+
 import com.situ2001.cliptokindle.util.Serializer;
 
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import java.util.function.Consumer;
 
 public class DisplayableList implements Serializable {
     private java.util.List<Displayable> list;
-    private java.util.Map<String, InputStream> fileMap; // add a map
+    private java.util.Map<String, Uri> fileMap; // add a map
     private final Serializer serializer;
 
     public DisplayableList() {
@@ -51,7 +53,7 @@ public class DisplayableList implements Serializable {
         return list.stream().anyMatch(e -> e.equals(t));
     }
 
-    public Map<String, InputStream> getMap() {
+    public Map<String, Uri> getMap() {
         if (fileMap == null) {
             fileMap = new HashMap<>();
         }

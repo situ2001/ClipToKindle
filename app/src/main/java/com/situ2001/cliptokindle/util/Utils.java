@@ -1,12 +1,14 @@
 package com.situ2001.cliptokindle.util;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.net.wifi.WifiManager;
 
 import java.io.File;
 
 public class Utils {
     private static File storagePath;
+    private static ContextWrapper contextWrapper;
 
     /**
      * Get wifi status by using a WifiManager
@@ -55,5 +57,13 @@ public class Utils {
      */
     public static File getStoragePath() {
         return storagePath;
+    }
+
+    public static void setContextWrapper(ContextWrapper c) {
+        contextWrapper = c;
+    }
+
+    public static ContextWrapper getContext() {
+        return contextWrapper;
     }
 }
