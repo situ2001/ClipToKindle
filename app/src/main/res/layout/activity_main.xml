@@ -50,14 +50,14 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button_debug"
+        android:id="@+id/get_book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="132dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/get_clip_board_text"
-        app:layout_constraintTop_toBottomOf="@+id/content_fragment" />
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/get_book"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/get_clip_board_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

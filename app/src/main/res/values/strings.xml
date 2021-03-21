@@ -4,7 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fail_to_start_server">Failed to start server.</string>
     <string name="server_is_off">Server is off</string>
-    <string name="add_from_clipboard">ADD FROM CLIPBOARD</string>
+    <string name="add_from_clipboard">URL</string>
+    <string name="get_book">BOOK</string>
     <string name="server">Server</string>
     <string name="remove">REMOVE</string>
 </resources>

@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // test
-        Button button = findViewById(R.id.button_debug);
+        Button button = findViewById(R.id.get_book);
         button.setOnClickListener(l -> openFile());
     }
 
