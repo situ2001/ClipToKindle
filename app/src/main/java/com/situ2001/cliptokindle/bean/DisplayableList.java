@@ -4,12 +4,16 @@ import com.situ2001.cliptokindle.bean.text.Text;
 import com.situ2001.cliptokindle.util.Serializer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class DisplayableList implements Serializable {
     private java.util.List<Displayable> list;
+    private java.util.Map<String, InputStream> fileMap; // add a map
     private final Serializer serializer;
 
     public DisplayableList() {
@@ -21,13 +25,14 @@ public class DisplayableList implements Serializable {
     }
 
     public void add(Displayable o) {
-        if (o != null) {
+        if (o != null && !this.contains(o)) {
             list.add(o);
             serializer.save(list);
         }
     }
 
     public void remove(int index) {
+        fileMap.remove(list.get(index).getTitle());
         list.remove(index);
         serializer.save(list);
     }
@@ -46,5 +51,12 @@ public class DisplayableList implements Serializable {
 
     public boolean contains(Displayable t) {
         return list.stream().anyMatch(e -> e.equals(t));
+    }
+
+    public Map<String, InputStream> getMap() {
+        if (fileMap == null) {
+            fileMap = new HashMap<>();
+        }
+        return fileMap;
     }
 }
